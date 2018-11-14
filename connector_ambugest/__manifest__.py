@@ -13,10 +13,10 @@
     'website': 'https://www.nuobit.com',
     'depends': ['connector'],
     'data': [
-        'views/ir_translation_views.xml',
+        #'views/ir_translation_views.xml',
     ],
-    'external_dependencies': {
-        'python': [],
-    },
+    # 'external_dependencies': {
+    #     'python': [],
+    # },
     'installable': True,
 }
