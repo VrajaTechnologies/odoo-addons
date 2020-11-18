@@ -22,20 +22,6 @@
 
         <template id="external_layout_sargantana_invoice_header">
             <div class="header">
-                <div class="sarg-info vertical-text text-center">
-                    <t t-set="division" t-value="o.division_id.partner_id"/>
-                    <span t-field="o.company_id.name"/>
-                    <span t-field="o.company_id.vat"/>
-                    <span t-field="o.company_id.street"/>
-                    <span t-if="o.company_id.street2" t-field="o.company_id.street2"/>
-                    <span t-field="o.company_id.zip"/>
-                    <span t-field="o.company_id.city"/>
-                    <span t-field="division.phone"/>
-                    <span t-if="division.mobile" t-field="division.mobile"/>
-                    <span t-field="division.email"/>
-                    <span t-field="division.website"/>
-                </div>
-
                 <div class="row">
                     <div class="col-xs-6">
                         <img t-if="logoimage" t-att-src="'data:image/png;base64,%s' % logoimage"
@@ -110,7 +96,21 @@
         <template id="report_invoice_sargantana_document">
             <t t-call="custom_so.external_layout_sargantana_invoice">
                 <div class="page">
-                    <table class="table table-condensed">
+                    <div class="sarg-info vertical-text text-center">
+                        <t t-set="division" t-value="o.division_id.partner_id"/>
+                        <span t-field="o.company_id.name"/>
+                        <span t-field="o.company_id.vat"/>
+                        <span t-field="o.company_id.street"/>
+                        <span t-if="o.company_id.street2" t-field="o.company_id.street2"/>
+                        <span t-field="o.company_id.zip"/>
+                        <span t-field="o.company_id.city"/>
+                        <span t-field="division.phone"/>
+                        <span t-if="division.mobile" t-field="division.mobile"/>
+                        <span t-field="division.email"/>
+                        <span t-field="division.website"/>
+                    </div>
+
+                    <table class="table-sarg table-condensed-sarg">
                         <thead>
                             <tr class="border-orange-sarg">
                                 <th>Code</th>
@@ -238,9 +238,50 @@
 
         <template id="report_invoice_sargantana">
             <style>
+                /* clone bootstrap table + table condensed*/
+                .table-sarg {
+                  width: 100%;
+                  max-width: 100%;
+                  margin-bottom: 20px;
+                }
+                .table-sarg > thead > tr > th,
+                .table-sarg > tbody > tr > th,
+                .table-sarg > tfoot > tr > th,
+                .table-sarg > thead > tr > td,
+                .table-sarg > tbody > tr > td,
+                .table-sarg > tfoot > tr > td {
+                  padding: 8px;
+                  line-height: 1.42857143;
+                  vertical-align: top;
+                  border-top: 1px solid #ddd;
+                }
+                .table-sarg > thead > tr > th {
+                  vertical-align: bottom;
+                  border-bottom: 2px solid #FF6600;
+                }
+                .table-sarg > thead:first-child > tr:first-child > th,
+                .table-sarg > thead:first-child > tr:first-child > td {
+                  border-top: 0;
+                }
+                .table-sarg > tbody + tbody {
+                  border-top: 2px solid #ddd;
+                }
+                .table-sarg .table-sarg) {
+                  background-color: #fff;
+                }
+                .table-condensed-sarg > thead > tr > th,
+                .table-condensed-sarg > tbody > tr > th,
+                .table-condensed-sarg > tfoot > tr > th,
+                .table-condensed-sarg > thead > tr > td,
+                .table-condensed-sarg > tbody > tr > td,
+                .table-condensed-sarg > tfoot > tr > td {
+                  padding: 5px;
+                }
+
+                /**/
                 .container {
                     margin-left: 15px;
-                    }
+                }
 
                 .vertical-text {
                     /* Safari */
@@ -266,8 +307,8 @@
 
                 .sarg-info {
                     position: absolute;
-                    left: 0;
-                    top: 1150px;
+                    left: -8px;
+                    top: 950px;
                     margin:0;
                     padding:0;
 
@@ -275,14 +316,15 @@
                     white-space: nowrap;
                     color: #FF6600;
                     font-size: small;
-                    //background-color: green !important;
+                    /*background-color: green !important;*/
                 }
-
 
                 .border-orange-sarg {
                     border-top: 0px !important;
                     border-bottom: 2px solid #FF6600 !important;
                 }
+
+                /* table cond */
                 .background-orange-sarg {
                     width:11% !important;
                     background-color: #FF6600 !important;
@@ -299,6 +341,14 @@
                    width: 0.1% !important;
                    white-space: nowrap !important;
                }
+                /* */
+
+                .table-sarg {
+                    width: 100%;
+                    max-width: 100%;
+                    margin-bottom: 20px;
+                }
+
             </style>
 
             <t t-call="report.html_container">
